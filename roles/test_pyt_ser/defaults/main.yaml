@@ -1,0 +1,5 @@
+py_script_path: "/usr/local/lib/test-pyt-ser/"
+unit_path: "/etc/systemd/system/test-pyt-ser/"
+
+logs_pyt: logServ.py 
+serv_pyt: service.py

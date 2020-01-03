@@ -1,0 +1,44 @@
+---
+- name: create special python user for secure unit
+  user:
+    name: test-pyt-ser
+    state: present
+    system: yes
+    shell: /bin/false
+
+- name: create dirs for python scripts and unit file
+  file:
+    path: "{{ item }}" 
+    state: directory
+  with_items: 
+    - "{{ py_script_path }}"
+    - "{{ unit_path }}"
+
+- name: deploy python scripts
+  copy:
+    src: "{{ item }}"
+    dest: "{{ py_script_path }}"
+    owner: root
+    group: root
+    mode: "0644"
+  with_items: 
+    - "{{ logs_pyt }}"
+    - "{{ serv_pyt }}"
+
+- name: deploy service file
+  copy:
+    src: "test-pyt-ser.service"
+    dest: "{{ unit_path }}"
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: daemon reload
+  systemd:
+    daemon_reload: yes
+
+- name: start and enabled daemon
+  systemd:
+    state: started
+    name: test-pyt-ser.service
+    enabled: yes
