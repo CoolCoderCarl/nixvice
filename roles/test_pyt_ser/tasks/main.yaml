@@ -1,4 +1,30 @@
 ---
+- name: Epel repository installation
+  package:
+    name: epel-release
+    state: present
+
+- name: IUS repository installation
+  package:  
+    name: https://centos7.iuscommunity.org/ius-release.rpm
+    state: present
+
+- name: install Dev tools group
+  package:
+    name: "@Development tools"
+    state: present
+
+- name: install python36
+  package:
+    name: "{{ python36_pack }}"
+    state: present
+
+- name: upgrade pip package
+  pip:
+    name: pip
+    state: present
+    executable: pip3.6
+
 - name: create special python user for secure unit
   user:
     name: test-pyt-ser

@@ -1,3 +1,10 @@
+python36_pack:
+  - "python-setuptools"
+  - "python36u"
+  - "python36u-libs"
+  - "python36u-devel"
+  - "python36u-pip"
+
 py_script_path: "/usr/local/lib/test-pyt-ser/"
 unit_path: "/etc/systemd/system/test-pyt-ser/"
 
